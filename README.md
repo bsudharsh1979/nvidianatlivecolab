@@ -1,6 +1,6 @@
 # NVIDIA NIM notebooks for Google Colab
 
-Three Colab notebooks that call hosted [NVIDIA NIM](https://build.nvidia.com/) models. The models run on NVIDIA GPUs behind `https://integrate.api.nvidia.com`. Colab only sends the request, so the notebook uses the default CPU runtime and still gets the large models.
+Three Colab notebooks that call hosted [NVIDIA NIM](https://build.nvidia.com/) models. They run on the Colab Pro A100 GPU runtime and on the CPU runtime. The models run on NVIDIA data-center GPUs behind `https://integrate.api.nvidia.com`, so each notebook finishes in seconds. The notebooks are committed with their executed outputs, so you can read the replies before you run them.
 
 | Notebook | Model | What it is for |
 | --- | --- | --- |
@@ -19,10 +19,10 @@ Three Colab notebooks that call hosted [NVIDIA NIM](https://build.nvidia.com/) m
 3. Add a secret named `NVIDIA_API_KEY`.
 4. Paste a key from [build.nvidia.com](https://build.nvidia.com/).
 5. Enable notebook access for that secret.
-6. Leave the runtime on CPU. Do not switch to a GPU. A Colab GPU cannot load these models, and a GPU request can fail when Colab is busy.
+6. Choose **Runtime → Change runtime type → A100 GPU**. The first cell prints the attached GPU. If Colab has no A100 free, the CPU runtime gives the same reply because the model runs on NVIDIA's side.
 7. Choose **Runtime → Run all**.
 
-Colab Pro keeps the session alive longer, which helps when Ultra is still streaming. Any Colab runtime with internet access can run these notebooks. If the secret is missing, the notebook asks for the key with a hidden prompt instead of printing it.
+Each notebook completes in well under a minute on an A100 runtime. Any Colab runtime with internet access can run them. If the secret is missing, the notebook asks for the key with a hidden prompt instead of printing it.
 
 The demo cells use a few thousand tokens so they finish in a Colab session. Lightning and Ultra accept up to 32,768 tokens. Omni accepts up to 65,536. Raise `MAX_TOKENS` in the last cell if you want a longer reply, and keep it larger than the reasoning trace or the answer comes back empty.
 
